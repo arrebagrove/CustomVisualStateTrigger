@@ -1,5 +1,4 @@
-﻿using System;
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace CustomVisualStateTrigger
@@ -15,16 +14,8 @@ namespace CustomVisualStateTrigger
 
         private void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
         {
-            var currentHour = DateTime.Now.Hour;
-            //if (!(currentHour >= 18 || currentHour <= 6))
-            if (currentHour >= 18 || currentHour <= 6)
-            {
-                StarsStoryboard.Begin();
-            }
-            else
-            {
-                SunStoryboard.Begin();
-            }
+            StarsStoryboard.Begin();
+            SunStoryboard.Begin();
         }
     }
 }

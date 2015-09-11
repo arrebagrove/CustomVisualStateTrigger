@@ -23,9 +23,10 @@ namespace CustomVisualStateTrigger
             set
             {
                 _isLate = value;
-                var currentHour = DateTime.Now.Hour;
-                //if (!(currentHour >= 18 || currentHour <= 6))
-                if (currentHour >= 18 || currentHour <= 6)
+                var currentTime = DateTime.Now;
+                //if (!(currentTime.Hour >= 18 || currentTime.Hour <= 6))
+                //if (currentTime.Hour >= 18 || currentTime.Hour <= 6)
+                if (currentTime.Hour >= App.CheckHour && currentTime.Minute >= App.CheckMinute)
                 {
                     SetActive(value);
                 }
@@ -40,9 +41,10 @@ namespace CustomVisualStateTrigger
         {
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                var currentHour = DateTime.Now.Hour;
-                //if (!(currentHour >= 18 || currentHour <= 6))
-                if (currentHour >= 18 || currentHour <= 6)
+                var currentTime = DateTime.Now;
+                //if (!(currentTime.Hour >= 18 || currentTime.Hour <= 6))
+                //if (currentTime.Hour >= 18 || currentTime.Hour <= 6)
+                if (currentTime.Hour >= App.CheckHour && currentTime.Minute >= App.CheckMinute)
                 {
                     SetActive(IsLate);
                 }
