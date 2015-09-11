@@ -15,6 +15,7 @@ namespace CustomVisualStateTrigger
         public DateTimeTrigger()
         {
             _timer.Tick += TimerChanged;
+            _timer.Start();
         }
 
         public bool IsLate
