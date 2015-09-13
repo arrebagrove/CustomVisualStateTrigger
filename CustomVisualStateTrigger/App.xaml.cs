@@ -9,9 +9,6 @@ namespace CustomVisualStateTrigger
 {
     sealed partial class App : Application
     {
-        public const int CheckHour = 14;
-        public const int CheckMinute = 18;
-
         public App()
         {
             InitializeComponent();

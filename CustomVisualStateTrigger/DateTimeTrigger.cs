@@ -9,7 +9,7 @@ namespace CustomVisualStateTrigger
     /// </summary>
 	public class DateTimeTrigger : StateTriggerBase
     {
-        private bool _isLate;
+        private int _hour;
         private readonly DispatcherTimer _timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
 
         public DateTimeTrigger()
@@ -18,23 +18,14 @@ namespace CustomVisualStateTrigger
             _timer.Start();
         }
 
-        public bool IsLate
+        public int Hour
         {
-            get { return _isLate; }
+            get { return _hour; }
             set
             {
-                _isLate = value;
+                _hour = value;
                 var currentTime = DateTime.Now;
-                //if (!(currentTime.Hour >= 18 || currentTime.Hour <= 6))
-                //if (currentTime.Hour >= 18 || currentTime.Hour <= 6)
-                if (currentTime.Hour >= App.CheckHour && currentTime.Minute >= App.CheckMinute)
-                {
-                    SetActive(value);
-                }
-                else
-                {
-                    SetActive(!value);
-                }
+                SetActive(currentTime.Hour >= _hour && currentTime.Minute >= _hour);
             }
         }
 
@@ -43,16 +34,7 @@ namespace CustomVisualStateTrigger
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 var currentTime = DateTime.Now;
-                //if (!(currentTime.Hour >= 18 || currentTime.Hour <= 6))
-                //if (currentTime.Hour >= 18 || currentTime.Hour <= 6)
-                if (currentTime.Hour >= App.CheckHour && currentTime.Minute >= App.CheckMinute)
-                {
-                    SetActive(IsLate);
-                }
-                else
-                {
-                    SetActive(!IsLate);
-                }
+                SetActive(currentTime.Hour >= _hour && currentTime.Minute >= _hour);
             });
         }
     }
