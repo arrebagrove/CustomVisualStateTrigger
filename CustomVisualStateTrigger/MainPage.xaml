@@ -49,7 +49,7 @@
                 <!-- Day State -->
                 <VisualState x:Name="DayState">
                     <VisualState.StateTriggers>
-                        <local:DateTimeTrigger Hour="6" />
+                        <local:DateTimeTrigger Date="6:00:00" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="MoonGrid.Visibility" Value="Collapsed" />
@@ -70,7 +70,7 @@
                 <!--Night State-->
                 <VisualState x:Name="NightState">
                     <VisualState.StateTriggers>
-                        <local:DateTimeTrigger Hour="18" />
+                        <local:DateTimeTrigger Date="18:00:00" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="SunGrid.Visibility" Value="Collapsed" />

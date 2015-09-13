@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 
@@ -9,7 +10,8 @@ namespace CustomVisualStateTrigger
     /// </summary>
 	public class DateTimeTrigger : StateTriggerBase
     {
-        private int _hour;
+        private string _dateStr;
+        private DateTime _date;
         private readonly DispatcherTimer _timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
 
         public DateTimeTrigger()
@@ -18,14 +20,23 @@ namespace CustomVisualStateTrigger
             _timer.Start();
         }
 
-        public int Hour
+        public string Date
         {
-            get { return _hour; }
+            get { return _dateStr; }
             set
             {
-                _hour = value;
+                _dateStr = value;
+                if (_dateStr.All(c => c != ':') && _dateStr.All(c => c != '-') && _dateStr.All(c => c != '/'))
+                {
+                    throw new ArgumentException("Invalid or unknown date format, please see DateTime.Parse documentation");
+                }
                 var currentTime = DateTime.Now;
-                SetActive(currentTime.Hour >= _hour && currentTime.Minute >= _hour);
+                var result = DateTime.TryParse(_dateStr, out _date);
+                if (!result)
+                {
+                    throw new ArgumentException("Invalid or unknown date format, please see DateTime.Parse documentation");
+                }
+                SetActive(currentTime.Subtract(_date).TotalSeconds > 0);
             }
         }
 
@@ -34,7 +45,7 @@ namespace CustomVisualStateTrigger
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 var currentTime = DateTime.Now;
-                SetActive(currentTime.Hour >= _hour && currentTime.Minute >= _hour);
+                SetActive(currentTime.Subtract(_date).TotalSeconds > 0);
             });
         }
     }
