@@ -32,7 +32,7 @@ namespace CustomVisualStateTrigger
                 {
                     throw new ArgumentException("Invalid or unknown date format, please see DateTime.Parse documentation");
                 }
-                result = DateTime.Now.Subtract(_date).TotalSeconds > 0;
+                result = DateTime.Now.Hour > _date.Hour;
                 SetActive(result);
             }
         }
@@ -41,9 +41,8 @@ namespace CustomVisualStateTrigger
         {
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                SetActive(DateTime.Now.Subtract(_date).TotalSeconds > 0);
+                SetActive(DateTime.Now.Hour > _date.Hour);
             });
         }
     }
-
 }
