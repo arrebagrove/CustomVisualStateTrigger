@@ -10,7 +10,6 @@ namespace CustomVisualStateTrigger
     /// </summary>
 	public class DateTimeTrigger : StateTriggerBase
     {
-        private string _dateStr;
         private DateTime _date;
         private readonly DispatcherTimer _timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
 
@@ -22,21 +21,19 @@ namespace CustomVisualStateTrigger
 
         public string Date
         {
-            get { return _dateStr; }
             set
             {
-                _dateStr = value;
-                if (_dateStr.All(c => c != ':') && _dateStr.All(c => c != '-') && _dateStr.All(c => c != '/'))
+                if (value.All(c => c != ':') && value.All(c => c != '-') && value.All(c => c != '/'))
                 {
                     throw new ArgumentException("Invalid or unknown date format, please see DateTime.Parse documentation");
                 }
-                var currentTime = DateTime.Now;
-                var result = DateTime.TryParse(_dateStr, out _date);
+                var result = DateTime.TryParse(value, out _date);
                 if (!result)
                 {
                     throw new ArgumentException("Invalid or unknown date format, please see DateTime.Parse documentation");
                 }
-                SetActive(currentTime.Subtract(_date).TotalSeconds > 0);
+                result = DateTime.Now.Subtract(_date).TotalSeconds > 0;
+                SetActive(result);
             }
         }
 
@@ -44,8 +41,7 @@ namespace CustomVisualStateTrigger
         {
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                var currentTime = DateTime.Now;
-                SetActive(currentTime.Subtract(_date).TotalSeconds > 0);
+                SetActive(DateTime.Now.Subtract(_date).TotalSeconds > 0);
             });
         }
     }

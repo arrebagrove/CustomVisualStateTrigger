@@ -46,31 +46,10 @@
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
 
-                <!-- Day State -->
-                <VisualState x:Name="DayState">
-                    <VisualState.StateTriggers>
-                        <local:DateTimeTrigger Date="6:00:00" />
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="MoonGrid.Visibility" Value="Collapsed" />
-                        <Setter Target="SunGrid.Visibility" Value="Visible" />
-                        <Setter Target="MainGrid.Background" Value="White" />
-                        <Setter Target="StatusBlock.Text" Value="Day" />
-                        <Setter Target="StatusBlock.Foreground" Value="Black" />
-                    </VisualState.Setters>
-                    <VisualState.Storyboard>
-                        <Storyboard x:Name="SunGridStoryboard">
-                            <DoubleAnimation Duration="0:0:0.5" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="SunGrid" d:IsOptimized="True"/>
-                            <DoubleAnimation Duration="0:0:0.5" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="SunGrid" d:IsOptimized="True"/>
-                            <DoubleAnimation Duration="0:0:0.5" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="SunGrid" d:IsOptimized="True"/>
-                        </Storyboard>
-                    </VisualState.Storyboard>
-                </VisualState>
-
                 <!--Night State-->
                 <VisualState x:Name="NightState">
                     <VisualState.StateTriggers>
-                        <local:DateTimeTrigger Date="18:00:00" />
+                        <local:DateTimeTrigger Date="9:58:00" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="SunGrid.Visibility" Value="Collapsed" />
@@ -84,6 +63,27 @@
                             <DoubleAnimation Duration="0:0:0.5" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="MoonGrid" d:IsOptimized="True"/>
                             <DoubleAnimation Duration="0:0:0.5" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="MoonGrid" d:IsOptimized="True"/>
                             <DoubleAnimation Duration="0:0:0.5" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="MoonGrid" d:IsOptimized="True"/>
+                        </Storyboard>
+                    </VisualState.Storyboard>
+                </VisualState>
+
+                <!-- Day State -->
+                <VisualState x:Name="DayState">
+                    <VisualState.StateTriggers>
+                        <local:DateTimeTrigger Date="9:55:00" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="MoonGrid.Visibility" Value="Collapsed" />
+                        <Setter Target="SunGrid.Visibility" Value="Visible" />
+                        <Setter Target="MainGrid.Background" Value="White" />
+                        <Setter Target="StatusBlock.Text" Value="Day" />
+                        <Setter Target="StatusBlock.Foreground" Value="Black" />
+                    </VisualState.Setters>
+                    <VisualState.Storyboard>
+                        <Storyboard x:Name="SunGridStoryboard">
+                            <DoubleAnimation Duration="0:0:0.5" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="SunGrid" d:IsOptimized="True"/>
+                            <DoubleAnimation Duration="0:0:0.5" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="SunGrid" d:IsOptimized="True"/>
+                            <DoubleAnimation Duration="0:0:0.5" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="SunGrid" d:IsOptimized="True"/>
                         </Storyboard>
                     </VisualState.Storyboard>
                 </VisualState>
